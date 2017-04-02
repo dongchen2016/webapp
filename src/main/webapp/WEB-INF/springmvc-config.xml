@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+  <!--配置handle，映射"/hello" -->
+    <!--<bean name="/hello" class="com.demo.web.action.HelloController"/>-->
+    <!-- spring 可以自动扫描base-pack下面的包或者是自爆下面的java文件，如果扫描到有spring的相关注解的类，就把
+       这些类注册为spring的bean-->
+    <context:component-scan base-package="com.demo.web.action"/>
+
+  <!--配置映射处理器将bean的name作为url进行查找，需要在配置Handle时指定name，映射"/hello" -->
+  <!--<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />-->
+  <!--配置annotation(注释)类型的处理映射器
+  配置上面扫描后的java对应类型的bean(有注释的java文件注册出来的) 的处理映射器-->
+  <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+
+  <!--SimpleControllerHandlerAdapter 是一个处理适配器，所有处理适配器都要实现HandlerAdapter接口 -->
+  <!--<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>-->
+  <!--配置annotation类型的处理器适配器-->
+  <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+
+
+  <!-- 视图解析器-->
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/view/"/>
+      <property name="suffix" value=".jsp"/>
+  </bean>
+  <!-- -可以增加对于webinf下面目录结构的prefix， suffix-->
+</beans>
