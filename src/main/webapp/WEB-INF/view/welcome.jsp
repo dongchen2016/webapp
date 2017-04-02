@@ -13,7 +13,7 @@
 <body>
 <span>${message}</span>123
 <div>
-    <form action="login" method="post">
+    <form action="login/${message}" method="post">
         用户名：<input name="username" type="text" id="username">
         密码：<input name="password" type="password" id="pwd">
         <button type="submit">注册</button>

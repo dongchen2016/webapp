@@ -4,6 +4,7 @@ package com.demo.web.action;
 import com.demo.web.entity.UserInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,13 @@ public class HelloController {
 
     @RequestMapping(value = "/login" ,method = {RequestMethod.GET,RequestMethod.POST})
     public String valid(Model model, UserInfo userinfo, @RequestParam("username") String username, @RequestParam("password") String password){
+        model.addAttribute("username",userinfo.getUsername());
+        model.addAttribute("username",userinfo.getPassword());
+        return "welcome";
+    }
+
+    @RequestMapping(value = "/login/{message}" ,method = {RequestMethod.GET,RequestMethod.POST})
+    public String pathVariable(Model model, UserInfo userinfo, @PathVariable String message){
         model.addAttribute("username",userinfo.getUsername());
         model.addAttribute("username",userinfo.getPassword());
         return "welcome";
