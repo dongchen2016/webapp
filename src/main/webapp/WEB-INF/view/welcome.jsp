@@ -16,7 +16,7 @@
     <form action="login/${message}" method="post">
         用户名：<input name="username" type="text" id="username">
         密码：<input name="password" type="password" id="pwd">
-        生日：<input name="birthday" type="text" id="birthday">
+        <%--生日：<input name="birthday" type="text" id="birthday">--%>
         <button type="submit">注册</button>
     </form>
 </div>
