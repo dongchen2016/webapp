@@ -17,6 +17,7 @@
         用户名：<input name="username" type="text" id="username">
         密码：<input name="password" type="password" id="pwd">
         <button type="submit">注册</button>
+        <h1>这是用来测试rebase操作的</h1>
     </form>
 </div>
 </body>
