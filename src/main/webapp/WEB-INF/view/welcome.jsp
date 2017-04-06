@@ -16,7 +16,7 @@
     <form action="login/${message}" method="post">
         用户名：<input name="username" type="text" id="username">
         密码：<input name="password" type="password" id="pwd">
-        <button type="submit">注册</button>
+        <button type="submit" id="submit">注册</button>
         <h1>这是用来测试rebase操作的2</h1>
     </form>
 </div>
