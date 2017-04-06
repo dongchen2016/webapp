@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<span>${message}</span>123
+<span>${message}</span>
 <div>
     <form action="login/${message}" method="post">
         用户名：<input name="username" type="text" id="username">
