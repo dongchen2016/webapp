@@ -1,19 +1,24 @@
 package com.demo.web.action;
 
 
-import com.demo.web.entity.UserInfo;
+import com.demo.entity.TbUser;
+import com.demo.entity.UserInfo;
+import com.demo.service.TestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by admin on 2017/03/31.
  */
 @Controller
 public class HelloController {
+
+    @Autowired
+    private TestService testService;
 
     @RequestMapping(value = "/hello" ,method = {RequestMethod.GET,RequestMethod.POST})
     public String handleRequest(Model model){
@@ -29,9 +34,10 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/login/{message}" ,method = {RequestMethod.GET,RequestMethod.POST})
-    public String pathVariable(Model model, UserInfo userinfo, @PathVariable String message){
+    public String pathVariable(Model model, @ModelAttribute UserInfo userinfo, @PathVariable String message){
         model.addAttribute("username",userinfo.getUsername());
         model.addAttribute("username",userinfo.getPassword());
+        List<TbUser> users = testService.getAllUser();
         return "welcome";
     }
 

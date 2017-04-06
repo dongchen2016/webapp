@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:mvc="http://www.springframework.org/schema/tool"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd">
   <!--配置handle，映射"/hello" -->
     <!--<bean name="/hello" class="com.demo.web.action.HelloController"/>-->
     <!-- spring 可以自动扫描base-pack下面的包或者是自爆下面的java文件，如果扫描到有spring的相关注解的类，就把
@@ -20,7 +21,15 @@
   <!--配置annotation类型的处理器适配器-->
   <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
 
-
+  <!--自定义类型转化器-->
+  <!--<mvc:annotation-driven conversion-service = "conversionService"/>
+  <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+      <property name="converters">
+          <list>
+              <bean class="com.demo.web.convert.StringToDateConverter" p:datePattern = "yyyy-MM-dd"></bean>
+          </list>
+      </property>
+  </bean>-->
   <!-- 视图解析器-->
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
       <property name="prefix" value="/WEB-INF/view/"/>
