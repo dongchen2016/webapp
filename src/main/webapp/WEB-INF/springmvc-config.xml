@@ -35,5 +35,4 @@
       <property name="prefix" value="/WEB-INF/view/"/>
       <property name="suffix" value=".jsp"/>
   </bean>
-  <!-- -可以增加对于webinf下面目录结构的prefix， suffix-->
 </beans>
