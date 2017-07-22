@@ -1,0 +1,12 @@
+.inform-color{
+    /*border: 1px solid blue;*/
+    padding: 2px;
+    height: 45%;
+}
+.boundary-right{
+    border-right:1px solid purple;
+}
+.boundary-button{
+    border-bottom: 1px solid purple;
+}
+
