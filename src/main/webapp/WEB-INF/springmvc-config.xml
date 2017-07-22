@@ -1,38 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/tool"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd">
-  <!--配置handle，映射"/hello" -->
-    <!--<bean name="/hello" class="com.demo.web.action.HelloController"/>-->
-    <!-- spring 可以自动扫描base-pack下面的包或者是自爆下面的java文件，如果扫描到有spring的相关注解的类，就把
-       这些类注册为spring的bean-->
-    <context:component-scan base-package="com.demo.web.action"/>
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-  <!--配置映射处理器将bean的name作为url进行查找，需要在配置Handle时指定name，映射"/hello" -->
-  <!--<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />-->
-  <!--配置annotation(注释)类型的处理映射器
-  配置上面扫描后的java对应类型的bean(有注释的java文件注册出来的) 的处理映射器-->
-  <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <context:component-scan base-package="com.demo.web.action" />
 
-  <!--SimpleControllerHandlerAdapter 是一个处理适配器，所有处理适配器都要实现HandlerAdapter接口 -->
-  <!--<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>-->
-  <!--配置annotation类型的处理器适配器-->
-  <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+    <mvc:annotation-driven conversion-service="conversionService">
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain; charset=UTF-8</value>
+                        <value>text/html; charset=UTF-8</value>
+                        <value>applicaiton/javascript; charset=UTF-8</value>
+                        <value>application/json; charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+            <bean class="org.springframework.http.converter.json.GsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json; charset=UTF-8</value>
+                        <value>application/x-www-form-urlencoded; charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
-  <!--自定义类型转化器-->
-  <!--<mvc:annotation-driven conversion-service = "conversionService"/>
-  <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
-      <property name="converters">
-          <list>
-              <bean class="com.demo.web.convert.StringToDateConverter" p:datePattern = "yyyy-MM-dd"></bean>
-          </list>
-      </property>
-  </bean>-->
-  <!-- 视图解析器-->
-  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-      <property name="prefix" value="/WEB-INF/view/"/>
-      <property name="suffix" value=".jsp"/>
-  </bean>
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="com.demo.web.convert.StringToDateConverter"/>
+            </list>
+        </property>
+    </bean>
+
+    <mvc:default-servlet-handler />
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/view/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
 </beans>
