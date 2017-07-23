@@ -3,6 +3,7 @@ package com.demo.web.action;
 
 
 import com.demo.service.LoginService;
+import com.demo.web.filter.SessionFilter;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
 
 
@@ -27,8 +30,9 @@ public class HelloController {
 
     @RequestMapping(value = "/valid" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String handleRequest(Model model, @RequestParam( "user") String userid, @RequestParam( "password") String pwd){
+    public String handleRequest(HttpServletRequest req,Model model, @RequestParam( "user") String userid, @RequestParam( "password") String pwd){
         model.addAttribute("message","Hello World1");
+        SessionFilter.setLoginUserId(req,userid);
         //ajax 返回json
         return loginService.validUser(userid,pwd);
     }

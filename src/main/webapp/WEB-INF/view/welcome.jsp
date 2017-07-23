@@ -45,8 +45,8 @@
      $("#container").height($(window).height());
      $("#middle-left, #middle-right,#button-left, #button-right").height($("#middle").height());
      $("#level1_add").click(function(){
-         var url = "/level1/add";
-         dialog_iframe({url: url, title: "新增任务：", width: 600, height: 300, scroll: false});
+         var url = "/levelOne/add";
+         dialog_iframe({url: url, title: "新增任务：", width: 600, height: 600, scroll: false});
      });
  });
 </script>

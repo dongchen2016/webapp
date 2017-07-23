@@ -10,18 +10,46 @@
 <head>
     <title>Title</title>
 </head>
+<link rel="stylesheet" media="all" type="text/css" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" media="all" type="text/css" href="/css/jquery-ui-timepicker-addon.css" />
+
+<!--js-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-timepicker-addon.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-timepicker-addon-i18n.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-sliderAccess.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#startTime,#endTime').datetimepicker({
+
+        });
+    });
+</script>
 <body>
 <div  style="width: 550px;height: 250px;">
-    <form id = "add" action="/levelOne/welcome">
+    <form id = "add" action="/levelOne/addResult">
         <div class="col-md-8 col-md-offset-2" >
-            <div>事件等级</div>
-            <div >
+            <span style="display: inline;">事件等级</span>
+            <div>
                 <select name="level" id="level" >
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
                     <option>4</option>
                 </select>
+            </div>
+        </div>
+        <div>
+            <span style="display: inline;">开始时间：</span>
+            <div>
+                <input type="text" name="startTime" id="startTime" value="" />
+            </div>
+        </div>
+        <div>
+            <span style="display: inline;">结束时间：</span>
+            <div>
+                <input type="text" name="endTime" id="endTime" value="" />
             </div>
         </div>
         <div class="col-md-8" >
