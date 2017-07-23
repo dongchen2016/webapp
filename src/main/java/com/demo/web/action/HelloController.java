@@ -1,15 +1,19 @@
 package com.demo.web.action;
 
 
-import com.demo.entity.TbUser;
-import com.demo.entity.UserInfo;
-import com.demo.service.TestService;
+
+import com.demo.service.LoginService;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.LinkedHashMap;
+
 
 /**
  * Created by admin on 2017/03/31.
@@ -18,28 +22,19 @@ import java.util.List;
 public class HelloController {
 
     @Autowired
-    private TestService testService;
+    private LoginService loginService;
+    protected static final Logger log = Logger.getLogger(HelloController.class);
 
-    @RequestMapping(value = "/hello" ,method = {RequestMethod.GET,RequestMethod.POST})
-    public String handleRequest(Model model){
+    @RequestMapping(value = "/valid" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String handleRequest(Model model, @RequestParam( "user") String userid, @RequestParam( "password") String pwd){
         model.addAttribute("message","Hello World1");
-        return "welcome";
+        //ajax 返回json
+        return loginService.validUser(userid,pwd);
     }
 
-    @RequestMapping(value = "/login" ,method = {RequestMethod.GET,RequestMethod.POST})
-    public String valid(Model model, UserInfo userinfo, @RequestParam("username") String username, @RequestParam("password") String password){
-        model.addAttribute("username",userinfo.getUsername());
-        model.addAttribute("username",userinfo.getPassword());
-        return "welcome";
-    }
-
-    @RequestMapping(value = "/login/{message}" ,method = {RequestMethod.GET,RequestMethod.POST})
-    public String pathVariable(Model model, @ModelAttribute UserInfo userinfo, @PathVariable String message){
-        model.addAttribute("username",userinfo.getUsername());
-        model.addAttribute("username",userinfo.getPassword());
-        List<TbUser> users = testService.getAllUser();
-        return "welcome";
-    }
-
-
+    @RequestMapping(value = "/welcome")
+    public String Index(){
+        return  "welcome";
+    };
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.persistence.LoginMapper">
+    <select id="validUser"  resultType="java.lang.Integer">
+        SELECT count(USERID) from TB_USERS
+        WHERE  (USERID = #{userid} OR USERNAME = #{userid})
+        AND PASSWORD = #{password}
+    </select>
+</mapper>

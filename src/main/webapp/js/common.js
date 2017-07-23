@@ -69,12 +69,13 @@ $("#login_input4 input").on('click',function(){//登陆按钮
 		 return false;
 		 }
 		 else{
-		//ajax请求
-		/*$.ajax({
+		 var data = $("form").serialize();
+		 //ajax请求
+		$.ajax({
 			type:"POST",
-			url:"ajax.php?action=login",
+			url:"/valid?" + data,
 			dataType:"json",
-			data:{"user":user,"password":password},
+			/*data:{"user":user,"password":password},*/
 			beforeSend:function(){
 				document.getElementById("login_tip").innerHTML = "登录中..."
 				},
@@ -84,18 +85,21 @@ $("#login_input4 input").on('click',function(){//登陆按钮
 					$("#login_content_log_02").fadeOut();
 					$("#login_content_log_03").fadeIn();
 					//alert(getCookie(user));
-					t1 = setTimeout("window.location.href='index.php'",3000);}
+					t1 = setTimeout("window.location.href='/welcome'",3000);}
 					else{
-						document.getElementById("login_tip").innerHTML = json.msg;}
+						document.getElementById("login_tip").innerHTML = json.msg;
+				}
 				}
 				
-			});}*/
+			});
+	 }
+});
 		 
-         document.getElementById("login_tip").innerHTML = "登录中...";
+    /*     document.getElementById("login_tip").innerHTML = "登录中...";
 		 t = setTimeout("demo()",1500);
-		 $("form").submit();
+		 /!*$("form").submit();*!/
 		 }
-	});
+	});*/
 function demo(){//效果测试
    var user = $("#login_input11").val();
    var password = $("#login_input12").val();
